@@ -30,7 +30,7 @@ public class GuestBookControllerImpl implements GuestBookController {
     public List<Record> getRecords() throws SQLException {
         List<Record> records = new ArrayList<Record>();
         ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM GUESTBOOK");
-        while(resultSet.next()){
+        while (resultSet.next()) {
             try {
                 Record tmp = new Record(resultSet.getInt("ID"), resultSet.getTimestamp("POSTDATE"), resultSet.getString("MESSAGE"));
                 records.add(tmp);
@@ -38,6 +38,15 @@ public class GuestBookControllerImpl implements GuestBookController {
                 e.printStackTrace();
             }
         }
+        resultSet.close();
         return records;
+    }
+
+    void close() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

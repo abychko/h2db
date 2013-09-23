@@ -1,35 +1,31 @@
 package h2db;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  * Hello world!
- *
  */
-public class GuestBook
-{
-    public static void main( String[] args ) throws SQLException, ClassNotFoundException {
+public class GuestBook {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
         GuestBookControllerImpl guestBookController;
         guestBookController = new GuestBookControllerImpl("guestbook", "SYSDBA", "MASTERKEY");
-        guestBookController.addRecord("Hi there! are you alive?");
 
-        for(Record rec : guestBookController.getRecords()){
+        for (Record rec : guestBookController.getRecords()) {
             rec.print();
         }
+        System.out.println("Enter your message with DONE at end");
+        Scanner mScanner = new Scanner(System.in);
+        String record = "";
+            try {
+                record += mScanner.nextLine();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+        guestBookController.addRecord(record);
+        guestBookController.close();
 
-
-    /*
-
-
-while(resultSet.next()){
-System.out.println(resultSet.getBigDecimal("col1"));
-System.out.println(resultSet.getString("s"));
-System.out.println("--------------");
-}
-
-resultSet.close();
-connection.close();*/
     }
 }
