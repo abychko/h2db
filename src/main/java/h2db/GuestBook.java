@@ -15,7 +15,7 @@ public class GuestBook {
         for (Record rec : guestBookController.getRecords()) {
             rec.print();
         }
-        System.out.println("Enter your message with DONE at end");
+        System.out.println("Enter your message:");
         Scanner mScanner = new Scanner(System.in);
         String record = "";
             try {
